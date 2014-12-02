@@ -8,9 +8,9 @@ License: GPLv2+
 Group: System Environment/Base
 BuildArch: noarch
 BuildRequires: systemd-units
-Requires(post): systemd
-Requires(preun): systemd
-Requires(postun): systemd
+Requires(post): systemd-units
+Requires(preun): systemd-units
+Requires(postun): systemd-units
 Requires: util-linux
 
 %description
@@ -30,14 +30,27 @@ mkdir -p %{buildroot}%{_unitdir}
 cp bin/rhci-initial-setup %{buildroot}%{_bindir}/rhci-initial-setup
 cp systemd/rhci-initial-setup-text.service %{buildroot}%{_unitdir}/rhci-initial-setup-text.service
 
+
 %post
-%systemd_post initial-setup-text.service
+if [ $1 -eq 1 ] ; then 
+    # Initial installation 
+    /bin/systemctl daemon-reload >/dev/null 2>&1 || :
+fi
 
 %preun
-%systemd_preun initial-setup-text.service
+if [ $1 -eq 0 ] ; then
+    # Package removal, not upgrade
+    /bin/systemctl --no-reload disable rhci-initial-setup-text.service > /dev/null 2>&1 || :
+    /bin/systemctl stop rhci-initial-setup-text.service > /dev/null 2>&1 || :
+fi
 
 %postun
-%systemd_postun_with_restart initial-setup-text.service
+/bin/systemctl daemon-reload >/dev/null 2>&1 || :
+if [ $1 -ge 1 ] ; then
+    # Package upgrade, not uninstall
+    /bin/systemctl try-restart rhci-initial-setup-text.service >/dev/null 2>&1 || :
+fi
+
 
 %clean
 rm -fr %{buildroot}
