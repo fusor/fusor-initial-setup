@@ -6,6 +6,7 @@ Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
 Group: System Environment/Base
+BuildArch: noarch
 BuildRequires: systemd-units
 Requires(post): systemd
 Requires(preun): systemd
@@ -22,8 +23,12 @@ invoke the rhci-installer upon reboot of a newly installed instance.
 %build
 
 %install
-cp bin/rhci-initial-setup %{_bindir}/rhci-initial-setup
-cp systemd/rhci-initial-setup-text.service %{_unitdir}/rhci-initial-setup-text.service
+rm -rf %{buildroot}
+mkdir -p %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_unitdir}
+
+cp bin/rhci-initial-setup %{buildroot}%{_bindir}/rhci-initial-setup
+cp systemd/rhci-initial-setup-text.service %{buildroot}%{_unitdir}/rhci-initial-setup-text.service
 
 %post
 %systemd_post initial-setup-text.service
@@ -33,6 +38,9 @@ cp systemd/rhci-initial-setup-text.service %{_unitdir}/rhci-initial-setup-text.s
 
 %postun
 %systemd_postun_with_restart initial-setup-text.service
+
+%clean
+rm -fr %{buildroot}
 
 %files
 %{_bindir}/rhci-initial-setup
