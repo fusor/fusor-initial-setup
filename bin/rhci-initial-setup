@@ -1,0 +1,19 @@
+#!/bin/bash
+
+DONE_FILE="/etc/.rhci-initial-setup.done"
+
+if [ -e ${DONE_FILE} ] ; then
+  echo "Path '${DONE_FILE}' exists"
+  echo "Exitting as it looks like we already ran."
+  exit 0
+fi
+
+echo "This is a test of the RHCI Initial setup"
+echo "Please enter a few characters so we may test user input, press [ENTER] when done:"
+read test_value
+
+echo ""
+echo "Thank you, you entered:  ${test_value}"
+
+touch ${DONE_FILE}
+
