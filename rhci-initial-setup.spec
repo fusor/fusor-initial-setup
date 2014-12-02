@@ -1,7 +1,7 @@
 Summary: RHCI Initial system configuration utility
 Name: rhci-initial-setup
 URL: https://github.com/fusor/fusor-installer
-Version: 0.0.1
+Version: 0.0.2
 Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
@@ -39,6 +39,9 @@ cp systemd/rhci-initial-setup-text.service %{_unitdir}/rhci-initial-setup-text.s
 %{_unitdir}/rhci-initial-setup-text.service
 
 %changelog
+* Tue Dec 02 2014 John Matthews <jwmatthews@gmail.com> 0.0.2-1
+- new package built with tito
+
 * Tue Dec 2 2014 John Matthews <jmatthews@redhat.com> - 0.0.1-1
 - Initial packaging, based on Fedora's InitialSetup package
   
