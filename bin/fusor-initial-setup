@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DONE_FILE="/etc/.rhci-initial-setup.done"
+DONE_FILE="/etc/.fusor-initial-setup.done"
 
 if [ -e ${DONE_FILE} ] ; then
   echo "Path '${DONE_FILE}' exists"

@@ -1,6 +1,6 @@
-Summary: RHCI Initial system configuration utility
-Name: rhci-initial-setup
-URL: https://github.com/fusor/fusor-installer
+Summary: Fusor Initial system configuration utility
+Name: fusor-initial-setup
+URL: https://github.com/fusor/fusor-initial-setup
 Version: 0.0.2
 Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
@@ -15,8 +15,8 @@ BuildRequires: systemd
 BuildArch: noarch
 
 %description
-The rhci-initial-setup utility runs after installation. It will automatically
-invoke the rhci-installer upon reboot of a newly installed instance.
+The fusor-initial-setup utility runs after installation. It will automatically
+invoke the fusor-installer upon reboot of a newly installed instance.
 
 %prep
 %setup -q
@@ -28,28 +28,28 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_unitdir}
 
-cp bin/rhci-initial-setup %{buildroot}%{_bindir}/rhci-initial-setup
-cp systemd/rhci-initial-setup-text.service %{buildroot}%{_unitdir}/rhci-initial-setup-text.service
+cp bin/fusor-initial-setup %{buildroot}%{_bindir}/fusor-initial-setup
+cp systemd/fusor-initial-setup-text.service %{buildroot}%{_unitdir}/fusor-initial-setup-text.service
 
 %post
 if [ $1 -eq 1 ] ; then 
     # Initial installation 
-    /bin/systemctl enable rhci-initial-setup-text.service >/dev/null 2>&1 || :
+    /bin/systemctl enable fusor-initial-setup-text.service >/dev/null 2>&1 || :
     /bin/systemctl daemon-reload >/dev/null 2>&1 || :
 fi
 
 %preun
 if [ $1 -eq 0 ] ; then
     # Package removal, not upgrade
-    /bin/systemctl --no-reload disable rhci-initial-setup-text.service > /dev/null 2>&1 || :
-    /bin/systemctl stop rhci-initial-setup-text.service > /dev/null 2>&1 || :
+    /bin/systemctl --no-reload disable fusor-initial-setup-text.service > /dev/null 2>&1 || :
+    /bin/systemctl stop fusor-initial-setup-text.service > /dev/null 2>&1 || :
 fi
 
 %postun
 /bin/systemctl daemon-reload >/dev/null 2>&1 || :
 if [ $1 -ge 1 ] ; then
     # Package upgrade, not uninstall
-    /bin/systemctl try-restart rhci-initial-setup-text.service >/dev/null 2>&1 || :
+    /bin/systemctl try-restart fusor-initial-setup-text.service >/dev/null 2>&1 || :
 fi
 
 
@@ -57,8 +57,8 @@ fi
 rm -fr %{buildroot}
 
 %files
-%{_bindir}/rhci-initial-setup
-%{_unitdir}/rhci-initial-setup-text.service
+%{_bindir}/fusor-initial-setup
+%{_unitdir}/fusor-initial-setup-text.service
 
 %changelog
 * Tue Dec 02 2014 John Matthews <jwmatthews@gmail.com> 0.0.2-1
