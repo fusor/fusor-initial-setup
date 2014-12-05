@@ -1,7 +1,7 @@
 Summary: Fusor Initial system configuration utility
 Name: fusor-initial-setup
 URL: https://github.com/fusor/fusor-initial-setup
-Version: 0.0.5
+Version: 0.0.6
 Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
@@ -61,6 +61,11 @@ rm -fr %{buildroot}
 %{_unitdir}/fusor-initial-setup-text.service
 
 %changelog
+* Fri Dec 05 2014 John Matthews <jwmatthews@gmail.com> 0.0.6-1
+- Set HOME if not set, katello-installer requires this. When we run from
+  systemd prior to user's logging in no HOME has been set, so we will default
+  to /root if not set. (jwmatthews@gmail.com)
+
 * Fri Dec 05 2014 John Matthews <jwmatthews@gmail.com> 0.0.5-1
 - Testing disable of fusor-initial-setup after it's run once
   (jwmatthews@gmail.com)
