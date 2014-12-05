@@ -2,6 +2,13 @@
 : ${HOME:="/root"}
 export HOME
 
+: ${USER:="root"}
+export USER
+
+DESKTOP_DIR="${HOME}/Desktop"
+WEBUI_SHORTCUT="${DESKTOP_DIR}/fusor_web_ui.desktop"
+LOG_SHORTCUT="${DESKTOP_DIR}/fusor_install_log.desktop"
+
 DONE_FILE="/etc/.fusor-initial-setup.done"
 
 if [ -e ${DONE_FILE} ] ; then
@@ -10,10 +17,26 @@ if [ -e ${DONE_FILE} ] ; then
   exit 0
 fi
 
-echo "Please wait while fusor-installer runs to setup and configure Satellite-6."
+echo "Please wait while fusor-installer runs to setup and configure Foreman + Katello."
 
 touch ${DONE_FILE}
 /usr/sbin/katello-installer
+
+mkdir -p ${DESKTOP_DIR}
+cp /usr/share/applications/firefox.desktop ${WEBUI_SHORTCUT}
+chmod a+x ${WEBUI_SHORTCUT}
+
+cp /usr/share/applications/gedit.desktop ${LOG_SHORTCUT}
+chmod a+x ${LOG_SHORTCUT}
+
+chown -R ${USER} ${DESKTOP_DIR}
+
+sed -i ${WEBUI_SHORTCUT} -e 's/Exec=firefox %u/Exec=firefox https:\/\/127.0.0.1/'
+sed -i ${WEBUI_SHORTCUT} -e 's/Name=Firefox Web Browser/Name=Fusor WebUI/'
+
+sed -i ${LOG_SHORTCUT} -e 's/Exec=gedit %U/Exec=gedit \/var\/log\/katello-installer\/katello-installer.log/'
+sed -i ${LOG_SHORTCUT} -e 's/Name=gedit/Name=Fusor Installer Logs/'
+
 
 echo "Please press enter to continue with normal boot sequence"
 read dummy_value
