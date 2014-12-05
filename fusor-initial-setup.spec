@@ -1,7 +1,7 @@
 Summary: Fusor Initial system configuration utility
 Name: fusor-initial-setup
 URL: https://github.com/fusor/fusor-initial-setup
-Version: 0.0.2
+Version: 0.0.3
 Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
@@ -61,6 +61,9 @@ rm -fr %{buildroot}
 %{_unitdir}/fusor-initial-setup-text.service
 
 %changelog
+* Fri Dec 05 2014 John Matthews <jwmatthews@gmail.com> 0.0.3-1
+- fatal: bad revision 'fusor-initial-setup-0.0.2-1..HEAD'
+
 * Tue Dec 02 2014 John Matthews <jwmatthews@gmail.com> 0.0.2-1
 - new package built with tito
 
