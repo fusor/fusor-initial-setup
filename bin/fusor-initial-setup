@@ -1,4 +1,6 @@
 #!/bin/bash
+: ${HOME:="/root"}
+export HOME
 
 DONE_FILE="/etc/.fusor-initial-setup.done"
 
