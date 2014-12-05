@@ -8,6 +8,9 @@ if [ -e ${DONE_FILE} ] ; then
   exit 0
 fi
 
+echo "Please wait while fusor-installer runs to setup and configure Satellite-6."
+
+touch ${DONE_FILE}
 /usr/sbin/katello-installer
 
 echo "Please press enter to continue with normal boot sequence"
