@@ -8,7 +8,7 @@ if [ -e ${DONE_FILE} ] ; then
   exit 0
 fi
 
-/usr/bin/katello-installer
+/usr/sbin/katello-installer
 
 echo "Please press enter to continue with normal boot sequence"
 read dummy_value
