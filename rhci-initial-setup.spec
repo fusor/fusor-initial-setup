@@ -6,12 +6,13 @@ Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
 Group: System Environment/Base
-BuildArch: noarch
-BuildRequires: systemd-units
-Requires(post): systemd-units
-Requires(preun): systemd-units
-Requires(postun): systemd-units
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: util-linux
+Requires(post): systemd
+Requires(preun): systemd
+Requires(postun): systemd
+BuildRequires: systemd
+BuildArch: noarch
 
 %description
 The rhci-initial-setup utility runs after installation. It will automatically
@@ -30,10 +31,10 @@ mkdir -p %{buildroot}%{_unitdir}
 cp bin/rhci-initial-setup %{buildroot}%{_bindir}/rhci-initial-setup
 cp systemd/rhci-initial-setup-text.service %{buildroot}%{_unitdir}/rhci-initial-setup-text.service
 
-
 %post
 if [ $1 -eq 1 ] ; then 
     # Initial installation 
+    /bin/systemctl enable rhci-initial-setup-text.service >/dev/null 2>&1 || :
     /bin/systemctl daemon-reload >/dev/null 2>&1 || :
 fi
 

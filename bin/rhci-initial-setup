@@ -8,12 +8,7 @@ if [ -e ${DONE_FILE} ] ; then
   exit 0
 fi
 
-echo "This is a test of the RHCI Initial setup"
-echo "Please enter a few characters so we may test user input, press [ENTER] when done:"
-read test_value
+/usr/bin/katello-installer
 
-echo ""
-echo "Thank you, you entered:  ${test_value}"
-
-touch ${DONE_FILE}
-
+echo "Please press enter to continue with normal boot sequence"
+read dummy_value
