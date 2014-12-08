@@ -1,0 +1,15 @@
+#!/bin/bash
+
+: ${HOME:="/root"}
+export HOME
+
+AUTOSTART_DIR="${HOME}/.config/autostart"
+TERMINAL_SHORTCUT="{AUTOSTART_DIR}/fusor_installer.desktop"
+
+if [ -e ${TERMINAL_SHORTCUT} ] ; then
+	# We only want this terminal to launch once on initial login
+	# If it's present delete it.
+	rm -f ${TERMINAL_SHORTCUT}
+fi
+
+katello-installer

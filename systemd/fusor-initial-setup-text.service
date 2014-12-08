@@ -10,9 +10,7 @@ Conflicts=plymouth-quit-wait.service
 #After=fusor-initial-setup-graphical.service
 ConditionKernelCommandLine=!rd.live.image
 ConditionPathExists=!/etc/.fusor-initial-setup.done
-## JWM 12/08/2014 Additions
-Wants=NetworkManager.service
-After=NetworkManager.service
+
 
 [Service]
 Type=oneshot

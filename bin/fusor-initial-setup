@@ -7,9 +7,12 @@ export USER
 
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 
+AUTOSTART_DIR="${HOME}/.config/autostart"
 DESKTOP_DIR="${HOME}/Desktop"
 WEBUI_SHORTCUT="${DESKTOP_DIR}/fusor_web_ui.desktop"
 LOG_SHORTCUT="${DESKTOP_DIR}/fusor_install_log.desktop"
+TERMINAL_AUTOSTART="{AUTOSTART_DIR}/fusor_installer.desktop"
+
 
 DONE_FILE="/etc/.fusor-initial-setup.done"
 
@@ -19,18 +22,22 @@ if [ -e ${DONE_FILE} ] ; then
   exit 0
 fi
 
-echo "Waiting 5 minutes then will attempt executing."
-sleep 300
-echo "Please wait while fusor-installer runs to setup and configure Foreman + Katello."
-
 #/usr/bin/rpm -qa --nosignature --nodigest --qf '%{NAME} %|EPOCH?{%{EPOCH}}:{0}| %{VERSION} %{RELEASE} %{ARCH}\n' &> /var/log/fusor_initial_setup
 #echo "Ran rpm -qa command"
+
+mkdir -p ${AUTOSTART_DIR}
+cp /usr/share/applications/gnome-terminal.desktop ${TERMINAL_AUTOSTART}
+chmod a+x ${TERMINAL_AUTOSTART}
+
+sed -i ${WEBUI_SHORTCUT} -e 's/Exec=gnome-terminal/Exec=gnome-terminal /usr/bin/launch_fusor_installer'
+sed -i ${WEBUI_SHORTCUT} -e 's/Name=Terminal/Name=Terminal to Launch Fusor Installer/'
 
 
 mkdir -p ${DESKTOP_DIR}
 cp /usr/share/applications/firefox.desktop ${WEBUI_SHORTCUT}
 chmod a+x ${WEBUI_SHORTCUT}
 
+cp /usr/share/applications/
 cp /usr/share/applications/gedit.desktop ${LOG_SHORTCUT}
 chmod a+x ${LOG_SHORTCUT}
 
@@ -43,7 +50,7 @@ sed -i ${LOG_SHORTCUT} -e 's/Exec=gedit %U/Exec=gedit \/var\/log\/katello-instal
 sed -i ${LOG_SHORTCUT} -e 's/Name=gedit/Name=Fusor Installer Logs/'
 
 touch ${DONE_FILE}
-/usr/sbin/katello-installer
+#/usr/sbin/katello-installer
 
-echo "Please press enter to continue with normal boot sequence"
-read dummy_value
+#echo "Please press enter to continue with normal boot sequence"
+#read dummy_value
