@@ -1,7 +1,7 @@
 Summary: Fusor Initial system configuration utility
 Name: fusor-initial-setup
 URL: https://github.com/fusor/fusor-initial-setup
-Version: 0.0.7
+Version: 0.0.8
 Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
@@ -61,6 +61,10 @@ rm -fr %{buildroot}
 %{_unitdir}/fusor-initial-setup-text.service
 
 %changelog
+* Mon Dec 08 2014 John Matthews <jwmatthews@gmail.com> 0.0.8-1
+- Working to get katello-installer to successfully run from systemd firstboot
+  (jwmatthews@gmail.com)
+
 * Fri Dec 05 2014 John Matthews <jwmatthews@gmail.com> 0.0.7-1
 - Added a desktop shortcut for Firefox to connect to webui and Gedit to open
   katello-installer.log (jwmatthews@gmail.com)
