@@ -5,6 +5,8 @@ export HOME
 : ${USER:="root"}
 export USER
 
+export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+
 DESKTOP_DIR="${HOME}/Desktop"
 WEBUI_SHORTCUT="${DESKTOP_DIR}/fusor_web_ui.desktop"
 LOG_SHORTCUT="${DESKTOP_DIR}/fusor_install_log.desktop"
@@ -19,8 +21,6 @@ fi
 
 echo "Please wait while fusor-installer runs to setup and configure Foreman + Katello."
 
-touch ${DONE_FILE}
-/usr/sbin/katello-installer
 
 mkdir -p ${DESKTOP_DIR}
 cp /usr/share/applications/firefox.desktop ${WEBUI_SHORTCUT}
@@ -37,6 +37,8 @@ sed -i ${WEBUI_SHORTCUT} -e 's/Name=Firefox Web Browser/Name=Fusor WebUI/'
 sed -i ${LOG_SHORTCUT} -e 's/Exec=gedit %U/Exec=gedit \/var\/log\/katello-installer\/katello-installer.log/'
 sed -i ${LOG_SHORTCUT} -e 's/Name=gedit/Name=Fusor Installer Logs/'
 
+touch ${DONE_FILE}
+/usr/sbin/katello-installer
 
 echo "Please press enter to continue with normal boot sequence"
 read dummy_value
