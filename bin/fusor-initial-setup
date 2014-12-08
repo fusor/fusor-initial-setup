@@ -11,7 +11,7 @@ AUTOSTART_DIR="${HOME}/.config/autostart"
 DESKTOP_DIR="${HOME}/Desktop"
 WEBUI_SHORTCUT="${DESKTOP_DIR}/fusor_web_ui.desktop"
 LOG_SHORTCUT="${DESKTOP_DIR}/fusor_install_log.desktop"
-TERMINAL_AUTOSTART="{AUTOSTART_DIR}/fusor_installer.desktop"
+TERMINAL_AUTOSTART="${AUTOSTART_DIR}/fusor_installer.desktop"
 
 
 DONE_FILE="/etc/.fusor-initial-setup.done"
@@ -26,18 +26,28 @@ fi
 #echo "Ran rpm -qa command"
 
 mkdir -p ${AUTOSTART_DIR}
-cp /usr/share/applications/gnome-terminal.desktop ${TERMINAL_AUTOSTART}
-chmod a+x ${TERMINAL_AUTOSTART}
 
-sed -i ${WEBUI_SHORTCUT} -e 's/Exec=gnome-terminal/Exec=gnome-terminal /usr/bin/launch_fusor_installer'
-sed -i ${WEBUI_SHORTCUT} -e 's/Name=Terminal/Name=Terminal to Launch Fusor Installer/'
+cat > /usr/share/applications/fusor_install.desktop << EOF
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Version=1.0
+Name=Fusor Setup
+Name[en_US]=Fusor Setup
+Exec=/usr/bin/gnome-terminal -e "bash -c /usr/bin/launch_fusor_installer;bash"
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=1
+EOF
+chmod a+x /usr/share/applications/fusor_install.desktop
+
+#link setup in autostart
+cp /usr/share/applications/fusor_install.desktop ${AUTOSTART_DIR}/fusor_install.desktop
 
 
 mkdir -p ${DESKTOP_DIR}
 cp /usr/share/applications/firefox.desktop ${WEBUI_SHORTCUT}
 chmod a+x ${WEBUI_SHORTCUT}
 
-cp /usr/share/applications/
 cp /usr/share/applications/gedit.desktop ${LOG_SHORTCUT}
 chmod a+x ${LOG_SHORTCUT}
 
