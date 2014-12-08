@@ -1,7 +1,7 @@
 Summary: Fusor Initial system configuration utility
 Name: fusor-initial-setup
 URL: https://github.com/fusor/fusor-initial-setup
-Version: 0.0.9
+Version: 0.0.10
 Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
@@ -63,6 +63,10 @@ rm -fr %{buildroot}
 %{_unitdir}/fusor-initial-setup-text.service
 
 %changelog
+* Mon Dec 08 2014 John Matthews <jwmatthews@gmail.com> 0.0.10-1
+- Trying experiment of launching katello-installer from a gnome-terminal,
+  instead of during boot process (jwmatthews@gmail.com)
+
 * Mon Dec 08 2014 John Matthews <jwmatthews@gmail.com> 0.0.9-1
 - Putting a temp change of waiting 5 mins before running katello-installer,
   thinking we may have a timing issue and need to adjust order of when fusor-
