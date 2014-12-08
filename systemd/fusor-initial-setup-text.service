@@ -10,6 +10,9 @@ Conflicts=plymouth-quit-wait.service
 #After=fusor-initial-setup-graphical.service
 ConditionKernelCommandLine=!rd.live.image
 ConditionPathExists=!/etc/.fusor-initial-setup.done
+## JWM 12/08/2014 Additions
+Wants=NetworkManager.service
+After=NetworkManager.service
 
 [Service]
 Type=oneshot
@@ -17,7 +20,7 @@ ExecStartPre=-/bin/plymouth quit
 ExecStartPre=/bin/kill -55 1
 ExecStart=/usr/bin/fusor-initial-setup
 ExecStartPost=/bin/kill -54 1
-ExecStartPost=systemctl disable fusor-initial-setup-text.service
+ExecStartPost=/usr/bin/systemctl disable fusor-initial-setup-text.service
 TimeoutSec=0
 RemainAfterExit=yes
 SysVStartPriority=99

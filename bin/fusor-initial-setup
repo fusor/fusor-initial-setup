@@ -19,7 +19,12 @@ if [ -e ${DONE_FILE} ] ; then
   exit 0
 fi
 
+echo "Waiting 5 minutes then will attempt executing."
+sleep 300
 echo "Please wait while fusor-installer runs to setup and configure Foreman + Katello."
+
+#/usr/bin/rpm -qa --nosignature --nodigest --qf '%{NAME} %|EPOCH?{%{EPOCH}}:{0}| %{VERSION} %{RELEASE} %{ARCH}\n' &> /var/log/fusor_initial_setup
+#echo "Ran rpm -qa command"
 
 
 mkdir -p ${DESKTOP_DIR}
