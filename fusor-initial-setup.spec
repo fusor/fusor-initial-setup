@@ -1,7 +1,7 @@
 Summary: Fusor Initial system configuration utility
 Name: fusor-initial-setup
 URL: https://github.com/fusor/fusor-initial-setup
-Version: 0.0.11
+Version: 0.0.12
 Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
@@ -63,6 +63,10 @@ rm -fr %{buildroot}
 %{_unitdir}/fusor-initial-setup-text.service
 
 %changelog
+* Thu Dec 11 2014 John Matthews <jwmatthews@gmail.com> 0.0.12-1
+- Commenting out ExecStartPost to see if it helps remove the recursive systemd
+  call we've seen on firstboot (jwmatthews@gmail.com)
+
 * Mon Dec 08 2014 John Matthews <jwmatthews@gmail.com> 0.0.11-1
 - Updates from testing (jwmatthews@gmail.com)
 
