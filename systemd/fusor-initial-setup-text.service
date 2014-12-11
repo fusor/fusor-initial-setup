@@ -18,7 +18,9 @@ ExecStartPre=-/bin/plymouth quit
 ExecStartPre=/bin/kill -55 1
 ExecStart=/usr/bin/fusor-initial-setup
 ExecStartPost=/bin/kill -54 1
-ExecStartPost=/usr/bin/systemctl disable fusor-initial-setup-text.service
+# 12/11 commenting out ExecStartPost and rebuilding fusor-initial-setup
+# thinking the call to systemctl may be causing a recursive reload of systemd on firstboot?
+# ExecStartPost=/usr/bin/systemctl disable fusor-initial-setup-text.service
 TimeoutSec=0
 RemainAfterExit=yes
 SysVStartPriority=99
