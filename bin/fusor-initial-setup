@@ -27,7 +27,7 @@ fi
 
 mkdir -p ${AUTOSTART_DIR}
 
-cat > /usr/share/applications/fusor_install.desktop << EOF
+cat > /usr/share/applications/fusor_installer.desktop << EOF
 [Desktop Entry]
 Type=Application
 Encoding=UTF-8
@@ -38,10 +38,10 @@ Exec=/usr/bin/gnome-terminal -e "bash -c /usr/bin/launch_fusor_installer;bash"
 X-GNOME-Autostart-enabled=true
 X-GNOME-Autostart-Delay=1
 EOF
-chmod a+x /usr/share/applications/fusor_install.desktop
+chmod a+x /usr/share/applications/fusor_installer.desktop
 
 #link setup in autostart
-cp /usr/share/applications/fusor_install.desktop ${AUTOSTART_DIR}/fusor_install.desktop
+cp /usr/share/applications/fusor_installer.desktop ${AUTOSTART_DIR}/fusor_installer.desktop
 
 
 mkdir -p ${DESKTOP_DIR}
