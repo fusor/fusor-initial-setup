@@ -1,7 +1,7 @@
 Summary: Fusor Initial system configuration utility
 Name: fusor-initial-setup
 URL: https://github.com/fusor/fusor-initial-setup
-Version: 0.0.13
+Version: 0.0.14
 Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
@@ -64,6 +64,9 @@ rm -fr %{buildroot}
 %{_unitdir}/fusor-initial-setup-text.service
 
 %changelog
+* Wed Dec 17 2014 John Matthews <jwmatthews@gmail.com> 0.0.14-1
+- Update to call fusor-installer (jwmatthews@gmail.com)
+
 * Thu Dec 11 2014 John Matthews <jwmatthews@gmail.com> 0.0.13-1
 - Fix typo so we won't run katello-installer on every reboot
   (jwmatthews@gmail.com)
