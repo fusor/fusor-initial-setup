@@ -8,6 +8,7 @@ License: GPLv2+
 Group: System Environment/Base
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: util-linux
+Requires: fusor-installer
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd

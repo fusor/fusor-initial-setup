@@ -13,4 +13,5 @@ if [ -e ${TERMINAL_SHORTCUT} ] ; then
 fi
 
 echo "Please allow several minutes for fusor-installer to complete running."
-katello-installer
+fusor-installer
+#katello-installer
