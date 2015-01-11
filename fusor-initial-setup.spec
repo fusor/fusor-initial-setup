@@ -1,7 +1,7 @@
 Summary: Fusor Initial system configuration utility
 Name: fusor-initial-setup
 URL: https://github.com/fusor/fusor-initial-setup
-Version: 0.0.14
+Version: 0.0.15
 Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
@@ -64,6 +64,10 @@ rm -fr %{buildroot}
 %{_unitdir}/fusor-initial-setup-text.service
 
 %changelog
+* Sun Jan 11 2015 John Matthews <jwmatthews@gmail.com> 0.0.15-1
+- Adding a hack to update /etc/hosts if hostname changed during install.
+  (jwmatthews@gmail.com)
+
 * Wed Dec 17 2014 John Matthews <jwmatthews@gmail.com> 0.0.14-1
 - Update to call fusor-installer (jwmatthews@gmail.com)
 
