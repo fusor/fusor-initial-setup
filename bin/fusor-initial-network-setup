@@ -27,7 +27,7 @@ function enable_device {
 	fi
 
 	device_ip=`ifconfig $device | grep "inet " | sed 's/^ *//' | cut -f 2 -d ' '`
-	cat "$device_ip `hostname` `hostname -s`" >> /etc/hosts
+	echo "$device_ip `hostname` `hostname -s`" >> /etc/hosts
 }
 
 ###

@@ -34,7 +34,7 @@ Encoding=UTF-8
 Version=1.0
 Name=Fusor Setup
 Name[en_US]=Fusor Setup
-Exec=/usr/bin/gnome-terminal -e "bash -c /usr/bin/launch_fusor_installer;bash"
+Exec=/usr/bin/gnome-terminal -e "bash -c /usr/bin/launch-fusor-installer;bash"
 X-GNOME-Autostart-enabled=true
 X-GNOME-Autostart-Delay=1
 EOF
