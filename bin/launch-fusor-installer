@@ -12,6 +12,7 @@ if [ -e ${TERMINAL_SHORTCUT} ] ; then
 	rm -f ${TERMINAL_SHORTCUT}
 fi
 
+/usr/bin/fusor-initial-network-setup
 # 
 # If someone changes the hostname from Anaconda install we need to update
 # /etc/hosts so that the "hostname --fqdn" option works.

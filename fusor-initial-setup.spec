@@ -30,7 +30,8 @@ mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_unitdir}
 
 cp bin/fusor-initial-setup %{buildroot}%{_bindir}/fusor-initial-setup
-cp bin/launch_fusor_installer %{buildroot}%{_bindir}/launch_fusor_installer
+cp bin/fusor-initial-network-setup %{buildroot}%{_bindir}/fusor-initial-network-setup
+cp bin/launch-fusor-installer %{buildroot}%{_bindir}/launch-fusor-installer
 cp systemd/fusor-initial-setup-text.service %{buildroot}%{_unitdir}/fusor-initial-setup-text.service
 
 %post
@@ -60,7 +61,8 @@ rm -fr %{buildroot}
 
 %files
 %{_bindir}/fusor-initial-setup
-%{_bindir}/launch_fusor_installer
+%{_bindir}/fusor-initial-network-setup
+%{_bindir}/launch-fusor-installer
 %{_unitdir}/fusor-initial-setup-text.service
 
 %changelog

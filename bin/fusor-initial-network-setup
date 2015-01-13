@@ -1,0 +1,53 @@
+#!/bin/bash
+
+###
+# RHEL-7 is defaulting to network devices not being enabled.
+# On initial boot of RHCI we will attempt to enable first network device that is not 'lo'
+# 1) Determine what devices are present
+# 2) Enable DHCP if BOOTPROTO=none
+# 3) Tell NetworkManager to bring up the device
+# 4) Add an entry in /etc/hosts (required so fusor-installer is able to execute "hostname --fqdn")
+##
+
+function enable_device {
+	device=$1
+	ifcfg_file="/etc/sysconfig/network-scripts/ifcfg-$device"
+	if [ -f $ifcfg_file ]; then
+		sed -i "s/BOOTPROTO=none/BOOTPROTO=dhcp/" $ifcfg_file
+		sed -i "s/ONBOOT=no/ONBOOT=yes/" $ifcfg_file
+	else
+		echo "Skipping network device '$device' since can't find $ifcfg_file"
+	fi
+
+	nmcli con up $device
+	status=$?
+	if [ $status != 0 ]; then
+		echo "Bad status '$status' from bringing up device '$device'"
+		exit
+	fi
+
+	device_ip=`ifconfig $device | grep "inet " | sed 's/^ *//' | cut -f 2 -d ' '`
+	cat "$device_ip `hostname` `hostname -s`" >> /etc/hosts
+}
+
+###
+# Get all devices NetworkManager sees
+# Expected output of "nmcli -f device d"
+#  nmcli -f device d
+#     DEVICE 
+#     eth0   
+#     lo 
+###
+all_devices=`nmcli -f device d`
+
+for device in $all_devices 
+do
+  if [[ ! $device =~ "lo" ]] && [[ ! $device =~ "DEVICE" ]]; then
+  	enable_device $device
+  	# Only enable first device that isn't 'lo'
+  	break
+  fi
+done
+
+
+
