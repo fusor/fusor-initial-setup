@@ -12,13 +12,8 @@ if [ -e ${TERMINAL_SHORTCUT} ] ; then
 	rm -f ${TERMINAL_SHORTCUT}
 fi
 
+echo "Bringing network up"
 /usr/bin/fusor-initial-network-setup
-# 
-# If someone changes the hostname from Anaconda install we need to update
-# /etc/hosts so that the "hostname --fqdn" option works.
-#
-sed -i /etc/hosts -e "s/foreman.livecd.lan /`hostname` /"
-sed -i /etc/hosts -e "s/foreman /`hostname -s` /"
 
 echo "Please allow several minutes for fusor-installer to complete running."
 

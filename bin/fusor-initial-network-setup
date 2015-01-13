@@ -26,6 +26,13 @@ function enable_device {
 		exit
 	fi
 
+	###
+	# HACK:
+	# We need 'hostname --fqdn' to return a valid value
+	# Adding an entry in /etc/hosts, yet this is likely not the 'correct' thing to do
+	# We are assuming a DHCP setup, then we are adding the obtained IP to /etc/hosts
+	# This is likely OK for initial setup, but doesn't handle likely case of IP changing later and a bad entry existing in /etc/hosts
+	###
 	device_ip=`ifconfig $device | grep "inet " | sed 's/^ *//' | cut -f 2 -d ' '`
 	echo "$device_ip `hostname` `hostname -s`" >> /etc/hosts
 }
