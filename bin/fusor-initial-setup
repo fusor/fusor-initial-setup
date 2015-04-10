@@ -43,6 +43,10 @@ chmod a+x /usr/share/applications/fusor_installer.desktop
 #link setup in autostart
 cp /usr/share/applications/fusor_installer.desktop ${AUTOSTART_DIR}/fusor_installer.desktop
 
+# Workaround needed to correct missing files in foreman-discovery-image
+# The RPM for foreman-discovery-image peforms work in a %posttrans which is not honored with the LiveCD's install to disk
+# We are performing those steps in this workaround
+/usr/bin/foreman-discovery-image-repair.sh
 
 mkdir -p ${DESKTOP_DIR}
 cp /usr/share/applications/firefox.desktop ${WEBUI_SHORTCUT}
