@@ -1,7 +1,7 @@
 Summary: Fusor Initial system configuration utility
 Name: fusor-initial-setup
 URL: https://github.com/fusor/fusor-initial-setup
-Version: 0.0.19
+Version: 0.0.20
 Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
@@ -68,6 +68,12 @@ rm -fr %{buildroot}
 %{_unitdir}/fusor-initial-setup-text.service
 
 %changelog
+* Mon Apr 13 2015 John Matthews <jwmatthews@gmail.com> 0.0.20-1
+- Updated to always attempt to remove the symlinks for foreman-discovery
+  (jwmatthews@gmail.com)
+- updated the file to include the .iso extension, and updated check for symlink
+  name (jkim@localhost.localdomain)
+
 * Mon Apr 13 2015 John Matthews <jwmatthews@gmail.com> 0.0.19-1
 - Updated fusor-initial-setup to perform workaround for foreman-discovery-
   images (jwmatthews@gmail.com)
