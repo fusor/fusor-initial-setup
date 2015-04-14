@@ -18,12 +18,8 @@ cp ${TMP_DIR}/tftpboot/initrd0.img  ${BOOT_DIR}/${ISO_FILE}-img
 cp ${TMP_DIR}/tftpboot/vmlinuz0 ${BOOT_DIR}/${ISO_FILE}-vmlinuz
 
 cd ${BOOT_DIR}
-if [ ! -e ${FDI_VMLINUZ} ] || [ -e ${FDI_VMLINUZ} ]; then
-	rm -f ${FDI_VMLINUZ}
-fi
-if [ ! -e ${FDI_IMG} ] || [ -e ${FDI_IMG} ] ; then
-	rm -f ${FDI_IMG}
-fi
+rm -f ${FDI_VMLINUZ}
+rm -f ${FDI_IMG}
 ln -s ${ISO_FILE}-vmlinuz ${FDI_VMLINUZ}
 ln -s ${ISO_FILE}-img ${FDI_IMG}
 
