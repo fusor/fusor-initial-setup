@@ -28,6 +28,7 @@ invoke the fusor-installer upon reboot of a newly installed instance.
 rm -rf %{buildroot}
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_unitdir}
+mkdir -p %{buildroot}%{_datadir}/fusor-initial-setup/
 
 cp bin/fusor-initial-setup %{buildroot}%{_bindir}/fusor-initial-setup
 cp bin/fusor-initial-network-setup %{buildroot}%{_bindir}/fusor-initial-network-setup
