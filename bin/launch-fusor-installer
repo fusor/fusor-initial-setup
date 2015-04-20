@@ -18,3 +18,6 @@ echo "Bringing network up"
 echo "Please allow several minutes for fusor-installer to complete running."
 
 fusor-installer
+
+echo "Restarting network..."
+systemctl restart network
