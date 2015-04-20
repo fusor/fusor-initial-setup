@@ -17,7 +17,10 @@ echo "Bringing network up"
 
 echo "Please allow several minutes for fusor-installer to complete running."
 
-fusor-installer
+fusor-installer --foreman-admin-password=changeme
 
 echo "Restarting network..."
 systemctl restart network
+
+echo "Uploading a RHCI Manifest to the Default Organization"
+hammer -u admin -p changeme subscription upload --file /usr/share/fusor-initial-setup/manifest.zip --organization-id 1
