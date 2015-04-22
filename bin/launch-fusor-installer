@@ -24,5 +24,8 @@ systemctl restart network
 echo "Restarting named..."
 systemctl restart named.service
 
+echo "Restarting dhcpd..."
+systemctl restart dhcpd.service
+
 echo "Uploading a RHCI Manifest to the Default Organization"
 hammer -u admin -p changeme subscription upload --file /usr/share/fusor-initial-setup/manifest.zip --organization-id 1
