@@ -35,7 +35,6 @@ cp bin/fusor-initial-network-setup %{buildroot}%{_bindir}/fusor-initial-network-
 cp bin/foreman-discovery-image-repair.sh %{buildroot}%{_bindir}/foreman-discovery-image-repair.sh
 cp bin/launch-fusor-installer %{buildroot}%{_bindir}/launch-fusor-installer
 cp systemd/fusor-initial-setup-text.service %{buildroot}%{_unitdir}/fusor-initial-setup-text.service
-cp usr/share/fusor-initial-setup/manifest.zip %{buildroot}%{_datadir}/fusor-initial-setup/manifest.zip
 
 %post
 if [ $1 -eq 1 ] ; then 
@@ -68,7 +67,6 @@ rm -fr %{buildroot}
 %{_bindir}/launch-fusor-installer
 %{_bindir}/foreman-discovery-image-repair.sh
 %{_unitdir}/fusor-initial-setup-text.service
-%{_datadir}/fusor-initial-setup/manifest.zip
 
 %changelog
 * Mon Apr 13 2015 John Matthews <jwmatthews@gmail.com> 0.0.20-1
