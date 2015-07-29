@@ -57,11 +57,11 @@ chmod a+x ${LOG_SHORTCUT}
 
 chown -R ${USER} ${DESKTOP_DIR}
 
-sed -i ${WEBUI_SHORTCUT} -e 's/Exec=firefox %u/Exec=firefox https:\/\/127.0.0.1/'
-sed -i ${WEBUI_SHORTCUT} -e 's/Name=Firefox Web Browser/Name=Fusor WebUI/'
+sed -i ${WEBUI_SHORTCUT} -e 's/Exec=firefox %u/Exec=firefox https:\/\/127.0.0.1\/r\/#\/deployments\/new\/start/'
+sed -i ${WEBUI_SHORTCUT} -e 's/Name=Firefox Web Browser/Name=Red Hat Cloud Infrastructure WebUI/'
 
 sed -i ${LOG_SHORTCUT} -e 's/Exec=gedit %U/Exec=gedit \/var\/log\/katello-installer\/katello-installer.log/'
-sed -i ${LOG_SHORTCUT} -e 's/Name=gedit/Name=Fusor Installer Logs/'
+sed -i ${LOG_SHORTCUT} -e 's/Name=gedit/Name=Red Hat Cloud Infrastructure Initial Setup Log/'
 
 touch ${DONE_FILE}
 #/usr/sbin/katello-installer
