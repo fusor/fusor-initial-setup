@@ -32,6 +32,7 @@ mkdir -p %{buildroot}%{_datadir}/fusor-initial-setup/
 
 cp bin/fusor-initial-setup %{buildroot}%{_bindir}/fusor-initial-setup
 cp bin/fusor-initial-network-setup %{buildroot}%{_bindir}/fusor-initial-network-setup
+cp bin/fusor-local-nfs-setup %{buildroot}%{_bindir}/fusor-local-nfs-setup
 cp bin/foreman-discovery-image-repair.sh %{buildroot}%{_bindir}/foreman-discovery-image-repair.sh
 cp bin/launch-fusor-installer %{buildroot}%{_bindir}/launch-fusor-installer
 cp systemd/fusor-initial-setup-text.service %{buildroot}%{_unitdir}/fusor-initial-setup-text.service
@@ -64,6 +65,7 @@ rm -fr %{buildroot}
 %files
 %{_bindir}/fusor-initial-setup
 %{_bindir}/fusor-initial-network-setup
+%{_bindir}/fusor-local-nfs-setup
 %{_bindir}/launch-fusor-installer
 %{_bindir}/foreman-discovery-image-repair.sh
 %{_unitdir}/fusor-initial-setup-text.service

@@ -1,0 +1,37 @@
+#This script adds rules to iptables for nfs
+if /usr/sbin/iptables -C INPUT -p tcp -m multiport --ports 22 -m comment --comment "22 accept - ssh" -m state --state NEW -j ACCEPT >/dev/null  2>&1; then
+  if ! /usr/sbin/iptables -C INPUT -p tcp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 20049 -j ACCEPT >/dev/null  2>&1; then
+    /usr/sbin/iptables -I INPUT 4 -p tcp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 20049 -j ACCEPT
+  fi
+  if ! /usr/sbin/iptables -C INPUT -p udp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 20049 -j ACCEPT >/dev/null  2>&1; then
+    /usr/sbin/iptables -I INPUT 4 -p udp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 20049 -j ACCEPT
+  fi
+  if ! /usr/sbin/iptables -C INPUT -p tcp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 111 -j ACCEPT >/dev/null  2>&1; then
+    /usr/sbin/iptables -I INPUT 4 -p tcp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 111 -j ACCEPT
+  fi
+  if ! /usr/sbin/iptables -C INPUT -p udp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 111 -j ACCEPT >/dev/null  2>&1; then
+    /usr/sbin/iptables -I INPUT 4 -p udp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 111 -j ACCEPT
+  fi
+  if ! /usr/sbin/iptables -C INPUT -p tcp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 2049 -j ACCEPT >/dev/null  2>&1; then
+    /usr/sbin/iptables -I INPUT 4 -p tcp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 2049 -j ACCEPT
+  fi
+  if ! /usr/sbin/iptables -C INPUT -p udp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 2049 -j ACCEPT >/dev/null  2>&1; then
+    /usr/sbin/iptables -I INPUT 4 -p udp -m conntrack --ctstate NEW,RELATED,ESTABLISHED --dport 2049 -j ACCEPT
+  fi
+fi
+/usr/sbin/service iptables save
+
+mkdir -p /var/lib/exports/{vms,exports,iso}
+chown -R 36:36 /var/lib/exports/{vms,exports,iso}
+
+cat << EOF > /etc/exports
+/var/lib/exports/ *(rw)
+EOF
+
+sed -i 's/RPCMOUNTDOPTS=""/RPCMOUNTDOPTS="-p 20049"/' /etc/sysconfig/nfs
+
+systemctl restart nfs-config
+systemctl restart nfs-mountd
+systemctl restart nfs-server
+systemctl -q enable nfs-server
+
