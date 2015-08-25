@@ -17,6 +17,9 @@ fi
 
 echo "Please allow several minutes for fusor-installer to complete running."
 fusor-installer --foreman-admin-password=changeme
+if [ "$?" -ne "0" ]; then
+    exit
+fi
 
 echo "Restarting network..."
 systemctl restart network
