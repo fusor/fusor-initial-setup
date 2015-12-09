@@ -22,7 +22,7 @@ if [ "$?" -ne "0" ]; then
 fi
 
 echo "Restarting network..."
-systemctl restart network
+systemctl restart network.service
 
 echo "Restarting named..."
 systemctl restart named.service
