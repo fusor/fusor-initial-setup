@@ -35,3 +35,8 @@ systemctl restart nfs-mountd
 systemctl restart nfs-server
 systemctl -q enable nfs-server
 
+
+echo "NFS shares for RHEV deployments have been created at:"
+echo " /var/lib/exports/vms"
+echo " /var/lib/exports/exports"
+
