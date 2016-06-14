@@ -21,11 +21,16 @@ if /usr/sbin/iptables -C INPUT -p tcp -m multiport --ports 22 -m comment --comme
 fi
 /usr/sbin/service iptables save
 
-mkdir -p /var/lib/exports/{vms,exports,iso}
+mkdir -p /var/lib/exports/{vms,exports,iso,registryvol}
 chown -R 36:36 /var/lib/exports/{vms,exports,iso}
+chown -R nfsnobody:nfsnobody /var/lib/exports/registryvol
+chmod 777 /var/lib/exports/registryvol
 
 cat << EOF > /etc/exports
-/var/lib/exports/ *(rw)
+/var/lib/exports/vms *(rw)
+/var/lib/exports/exports *(rw)
+/var/lib/exports/iso *(rw)
+/var/lib/exports/registryvol *(rw,all_squash)
 EOF
 
 sed -i 's/RPCMOUNTDOPTS=""/RPCMOUNTDOPTS="-p 20049"/' /etc/sysconfig/nfs
@@ -39,4 +44,5 @@ systemctl -q enable nfs-server
 echo "NFS shares for RHEV deployments have been created at:"
 echo " /var/lib/exports/vms"
 echo " /var/lib/exports/exports"
+echo " /var/lib/exports/registryvol"
 
