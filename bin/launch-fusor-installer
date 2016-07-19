@@ -20,12 +20,3 @@ fusor-installer --foreman-admin-password=changeme
 if [ "$?" -ne "0" ]; then
     exit
 fi
-
-echo "Restarting network..."
-systemctl restart network.service
-
-echo "Restarting named..."
-systemctl restart named.service
-
-echo "Restarting dhcpd..."
-systemctl restart dhcpd.service
