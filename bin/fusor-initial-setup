@@ -10,9 +10,7 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/b
 AUTOSTART_DIR="${HOME}/.config/autostart"
 DESKTOP_DIR="${HOME}/Desktop"
 WEBUI_SHORTCUT="${DESKTOP_DIR}/fusor_web_ui.desktop"
-LOG_SHORTCUT="${DESKTOP_DIR}/fusor_install_log.desktop"
 TERMINAL_AUTOSTART="${AUTOSTART_DIR}/fusor_installer.desktop"
-
 
 DONE_FILE="/etc/.fusor-initial-setup.done"
 
@@ -52,16 +50,10 @@ mkdir -p ${DESKTOP_DIR}
 cp /usr/share/applications/firefox.desktop ${WEBUI_SHORTCUT}
 chmod a+x ${WEBUI_SHORTCUT}
 
-cp /usr/share/applications/gedit.desktop ${LOG_SHORTCUT}
-chmod a+x ${LOG_SHORTCUT}
-
 chown -R ${USER} ${DESKTOP_DIR}
 
 sed -i ${WEBUI_SHORTCUT} -e 's/Exec=firefox %u/Exec=firefox https:\/\/127.0.0.1\/r\/#\/deployments\/new\/start/'
-sed -i ${WEBUI_SHORTCUT} -e 's/Name=Firefox Web Browser/Name=Red Hat Cloud Infrastructure WebUI/'
-
-sed -i ${LOG_SHORTCUT} -e 's/Exec=gedit %U/Exec=gedit \/var\/log\/katello-installer\/katello-installer.log/'
-sed -i ${LOG_SHORTCUT} -e 's/Name=gedit/Name=Red Hat Cloud Infrastructure Initial Setup Log/'
+sed -i ${WEBUI_SHORTCUT} -e 's/Name=Firefox Web Browser/Name=Red Hat QuickStart Cloud Installer WebUI/'
 
 touch ${DONE_FILE}
 #/usr/sbin/katello-installer
