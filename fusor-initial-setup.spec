@@ -40,22 +40,22 @@ cp systemd/fusor-initial-setup-text.service %{buildroot}%{_unitdir}/fusor-initia
 %post
 if [ $1 -eq 1 ] ; then 
     # Initial installation 
-    /bin/systemctl enable fusor-initial-setup-text.service >/dev/null 2>&1 || :
-    /bin/systemctl daemon-reload >/dev/null 2>&1 || :
+    /bin/systemctl enable fusor-initial-setup-text.service | tee /var/log/messages
+    /bin/systemctl daemon-reload | tee /var/log/messages
 fi
 
 %preun
 if [ $1 -eq 0 ] ; then
     # Package removal, not upgrade
-    /bin/systemctl --no-reload disable fusor-initial-setup-text.service > /dev/null 2>&1 || :
-    /bin/systemctl stop fusor-initial-setup-text.service > /dev/null 2>&1 || :
+    /bin/systemctl --no-reload disable fusor-initial-setup-text.service | tee /var/log/messages
+    /bin/systemctl stop fusor-initial-setup-text.service | tee /var/log/messages
 fi
 
 %postun
-/bin/systemctl daemon-reload >/dev/null 2>&1 || :
+/bin/systemctl daemon-reload | tee /var/log/messages
 if [ $1 -ge 1 ] ; then
     # Package upgrade, not uninstall
-    /bin/systemctl try-restart fusor-initial-setup-text.service >/dev/null 2>&1 || :
+    /bin/systemctl try-restart fusor-initial-setup-text.service | tee /var/log/messages
 fi
 
 
