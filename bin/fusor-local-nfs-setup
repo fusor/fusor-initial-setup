@@ -21,6 +21,12 @@ if /usr/sbin/iptables -C INPUT -p tcp -m multiport --ports 22 -m comment --comme
 fi
 /usr/sbin/service iptables save
 
+if ! rpm -qa | grep -q nfs-utils; then
+  echo "nfs-utils package is not installed, exiting..."
+  echo "Please install nfs-utils package and re-run."
+  exit 1
+fi
+
 mkdir -p /var/lib/exports/{vms,exports,iso,registryvol,self_hosted}
 chown -R 36:36 /var/lib/exports/{vms,exports,iso,self_hosted}
 chown -R nfsnobody:nfsnobody /var/lib/exports/registryvol
@@ -47,4 +53,3 @@ echo " /var/lib/exports/vms"
 echo " /var/lib/exports/exports"
 echo " /var/lib/exports/registryvol"
 echo " /var/lib/exports/self_hosted"
-
