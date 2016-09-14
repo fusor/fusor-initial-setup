@@ -21,7 +21,7 @@ if /usr/sbin/iptables -C INPUT -p tcp -m multiport --ports 22 -m comment --comme
 fi
 /usr/sbin/service iptables save
 
-if ! rpm -qa | grep -q nfs-utils; then
+if ! rpm -q --quiet nfs-utils; then
   echo "nfs-utils package is not installed, exiting..."
   echo "Please install nfs-utils package and re-run."
   exit 1
