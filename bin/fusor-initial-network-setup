@@ -2,7 +2,7 @@
 
 ###
 # RHEL-7 is defaulting to network devices not being enabled.
-# On initial boot of RHCI we will attempt to enable first network device that is not 'lo'
+# On initial boot of QCI we will attempt to enable first network device that is not 'lo'
 # 1) Determine what devices are present
 # 2) Enable DHCP if BOOTPROTO=none
 # 3) Tell NetworkManager to bring up the device
