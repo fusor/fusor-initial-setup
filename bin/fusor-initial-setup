@@ -16,7 +16,7 @@ DONE_FILE="/etc/.fusor-initial-setup.done"
 
 if [ -e ${DONE_FILE} ] ; then
   echo "Path '${DONE_FILE}' exists"
-  echo "Exitting as it looks like we already ran."
+  echo "Exiting as it looks like we already ran."
   exit 0
 fi
 
