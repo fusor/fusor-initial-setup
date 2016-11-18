@@ -23,7 +23,6 @@ ExecStartPost=/bin/kill -54 1
 # ExecStartPost=/usr/bin/systemctl disable fusor-initial-setup-text.service
 TimeoutSec=0
 RemainAfterExit=yes
-SysVStartPriority=99
 StandardInput=tty
 StandardOutput=tty
 
