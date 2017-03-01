@@ -1,7 +1,7 @@
 Summary: Fusor Initial system configuration utility
 Name: fusor-initial-setup
 URL: https://github.com/fusor/fusor-initial-setup
-Version: 1.1.0
+Version: 1.2.0
 Release: 0%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
